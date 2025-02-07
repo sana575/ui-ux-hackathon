@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 // app/page.tsx
 import Hero from "./components/Hero";
@@ -32,3 +33,23 @@ export default async function Home() {
     </main>
   );
 }
+=======
+import Hero from "./components/Hero";
+import BrowseTheRang from "./components/BrowseTheRang";
+import Product from "./components/Product";
+
+import Rooms from "./components/Rooms";
+import GridGallery from "./components/GridGallery";
+
+export default function Home() {
+  return (
+    <main>
+      <Hero />
+      <BrowseTheRang />
+      <Product />
+      <Rooms />
+      <GridGallery />
+    </main>
+  );
+}
+>>>>>>> 91a95cc9800027ad7578e5d07468c3779b1bd425
