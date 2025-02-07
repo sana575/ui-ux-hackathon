@@ -1,5 +1,6 @@
 
 import Image from 'next/image';
+import Link from 'next/link';
 export default function Rooms(){
     return(
         <div className='h-auto bg-[#FCF8F3] mt-10 flex flex-col lg:flex-row items-center justify-around'>
@@ -11,7 +12,9 @@ export default function Rooms(){
               Our designer already made a lot of beautiful prototypes of rooms that inspire you.
             </p>
             <button className='w-[70%] md:w-[176px] h-[48px] bg-[#B88E2F] text-[#FFFFFF] mt-8'>
-              Explore More
+            <Link href="/shop">
+              <span className="text-lg font-medium text-gray-900 block">Explor More</span>
+            </Link>
             </button>
           </div>
           <div className='mt-8 lg:mt-0'>

@@ -2,18 +2,13 @@
 import React from "react";
 import Image from "next/image";
 import Footer2 from "../components/Footer2";
+import BreadCrumb from "../components/BreadCrumb";
 
 const ContactPage = () => {
   return (
-    <>
+    <section>
       <div>
-        <Image
-          src={"/images/contact.png"}
-          alt="contact"
-          width={1440}
-          height={316}
-          className="w-full h-auto"
-        />
+      <BreadCrumb title="Contact" url="contact" />
       </div>
       <div className="flex flex-col items-center justify-center px-4 mt-10 lg:mt-20">
         <h1 className="text-[24px] sm:text-[30px] lg:text-[36px] font-semibold text-center">
@@ -88,7 +83,7 @@ const ContactPage = () => {
         </div>
       </div>
       <Footer2 />
-    </>
+    </section>
   );
 };
 

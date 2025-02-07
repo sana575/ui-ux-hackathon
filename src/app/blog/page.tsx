@@ -3,19 +3,14 @@ import React from 'react';
 import Image from 'next/image';
 import { IoSearchSharp } from "react-icons/io5";
 import Footer2 from '../components/Footer2';
+import BreadCrumb from '../components/BreadCrumb';
 
 const BlogPage = () => {
   return (
     <>
       {/* Banner Section */}
       <div>
-        <Image
-          src={"/images/blog.png"}
-          alt="blog"
-          width={1440}
-          height={316}
-          className="w-full h-auto"
-        />
+      <BreadCrumb title="Blog" url="blog" />
       </div>
 
       {/* Main Content */}
