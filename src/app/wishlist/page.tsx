@@ -5,7 +5,6 @@ import { useWishlist } from "@/context/WishlistContext";
 import Link from "next/link";
 import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
-import { product } from "@/sanity/product";
 import BreadCrumb from "../components/BreadCrumb";
 
 export default function WishlistPage() {

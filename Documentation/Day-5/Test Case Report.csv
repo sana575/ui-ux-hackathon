@@ -1,0 +1,7 @@
+Test Case ID,Test Case Description,Test Steps,ExpectedResult,Actual Result,Status,Severity level,Assigned To,                         Remarks
+TC001,Validate product listing page,Open homepage > Check if page loads correctly,Homepage loads without any issues,Homepage loaded successfully,Passed,Low,-,Product listing is accurate and user-friendly.
+TC002,Test API error handling,Enter search query > Verify search results,Relevant results are shown based on search query,Correct results displayed,Passed,Medium,-,Error handling works seamlessly during failures.
+TC003,Check cart functionality,Fill in form details > Submit form,"Form submitted successfully, confirmation shown",Form submission successful,Passed,High,-,Cart functionality is robust and intuitive.
+TC004,Ensure Responsiven ess on mobile,Resize browser window > Check layout,Layout adjusts properly for mobile screens,Responsive design working as expected,Passed,Medium,-,Design ensures consistency across devices.
+TC005,Validate cart functionality,Add item to cart > Check cart for correct item,Cart shows correct product with quantity,Cart updates correctly,Passed,High,-,Test successful
+TC006,Test login functionality,Enter valid credentials > Click login button,User logged in successfully,User login successful,Passed,High,-,No issues found

@@ -1,5 +1,4 @@
 
-//ProductDetailsClient.tsx (Client Component)
 'use client';
 
 import { useState, useEffect } from "react";
@@ -8,20 +7,20 @@ import Image from "next/image";
 import { AiFillStar, AiFillTwitterCircle } from "react-icons/ai";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import AddToCartButton from "@/app/components/AddToCartButton";
-
-const ProductDetailsClient = ({ product, params }: any) => {
+import { IProduct } from "@/types";
+const ProductDetailsClient = ({ product, params }: { product: IProduct, params: { id: string } }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
 
   useEffect(() => {
     const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
-    const productInWishlist = wishlist.find((item: any) => item.id === params.id);
+    const productInWishlist = wishlist.find((item: { id: string }) => item.id === params.id);
     setIsInWishlist(!!productInWishlist);
   }, [params.id]);
 
   const toggleWishlist = (product: any) => {
     const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
     if (isInWishlist) {
-      const updatedWishlist = wishlist.filter((item: any) => item.id !== product.id);
+      const updatedWishlist = wishlist.filter((item: { id: string }) => item.id !== product.id);
       localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     } else {
       wishlist.push(product);
@@ -98,7 +97,7 @@ const ProductDetailsClient = ({ product, params }: any) => {
             }}
           />
 
-          {/* <button
+          <button
             onClick={() =>
               toggleWishlist({
                 id: product._id,
@@ -110,7 +109,7 @@ const ProductDetailsClient = ({ product, params }: any) => {
             className="w-full bg-white border border-black text-black py-3 px-6 rounded-md hover:bg-gray-100 transition duration-200 mt-4"
           >
             {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
-          </button> */}
+          </button>
 
           <div className="border-b border-[#9F9F9F] w-full mt-14"></div>
           <div className="mt-8 flex items-center justify-start gap-8">

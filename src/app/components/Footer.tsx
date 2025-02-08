@@ -25,7 +25,7 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold mb-4">Menu</h4>
           <ul className="text-gray-600 space-y-2">
-            <li><Link href="#" className="hover:underline">Products</Link></li>
+            <li><Link href="/shop" className="hover:underline">Products</Link></li>
             <li><Link href="#" className="hover:underline">Rooms</Link></li>
             <li><Link href="#" className="hover:underline">Inspirations</Link></li>
             <li><Link href="#" className="hover:underline">About Us</Link></li>
@@ -37,10 +37,10 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold mb-4">Account</h4>
           <ul className="text-gray-600 space-y-2">
-            <li><Link href="#" className="hover:underline">My Account</Link></li>
-            <li><Link href="#" className="hover:underline">Checkout</Link></li>
-            <li><Link href="/card" className="hover:underline">My Cart</Link></li>
-            <li><Link href="#" className="hover:underline">My Catalog</Link></li>
+            <li><Link href="contact" className="hover:underline">My Account</Link></li>
+            <li><Link href="/ckeckout" className="hover:underline">Checkout</Link></li>
+            <li><Link href="/cart" className="hover:underline">My Cart</Link></li>
+            <li><Link href="/shop" className="hover:underline">My Catalog</Link></li>
           </ul>
         </div>
 

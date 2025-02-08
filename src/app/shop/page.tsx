@@ -4,12 +4,12 @@ import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import BreadCrumb from "../components/BreadCrumb";
-// import Image from "next/image";
+import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
 import { useWishlist } from "@/context/WishlistContext";
 import FilterSearchBar from "../components/FilterSearchBar";
-import Footer from "../components/Footer";
-import Footer2 from "../components/Footer2";
+
+
 
 const ShopPage = () => {
   const [products, setProducts] = useState([]);
@@ -146,10 +146,11 @@ const ShopPage = () => {
                   />
                 </button>
                 <div className="overflow-hidden rounded-md mb-4 relative">
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.title}
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                    layout="fill"
                   />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
@@ -205,7 +206,6 @@ const ShopPage = () => {
           ))}
         </div>
       </div>
-      <Footer2 />
     </div>
     
   );

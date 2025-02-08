@@ -19,34 +19,32 @@ type FormData = {
   additionalInfo?: string;
   paymentMethod: string;
 };
+  const Checkout = () => {
+    const { cartItems } = useCart(); // Move useCart hook to component level
+    const [selectedPayment, setSelectedPayment] = useState("");
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+    } = useForm<FormData>();
 
-const Checkout = () => {
-  const { cartItems } = useCart(); // Ensure clearCart is imported from useCart
-  const [selectedPayment, setSelectedPayment] = useState("");
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
+    const onSubmit = (data: FormData) => {
+      if (!selectedPayment) {
+        alert("Please select a payment method");
+        return;
+      }
 
-  const onSubmit = (data: FormData) => {
-    if (!selectedPayment) {
-      alert("Please select a payment method");
-      return;
-    }
+      const orderData = {
+        ...data,
+        paymentMethod: selectedPayment,
+        items: cartItems,
+        total: subtotal,
+      };
 
-    const orderData = {
-      ...data,
-      paymentMethod: selectedPayment,
-      items: cartItems,
-      total: subtotal,
+      console.log("Order Submitted:", orderData);
+      // clearCart function is not available
+      alert("Order placed successfully!");
     };
-
-    console.log("Order Submitted:", orderData);
-    useCart(); // Clear the cart after successful submission
-    alert("Order placed successfully!");
-  };
-
   const subtotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
