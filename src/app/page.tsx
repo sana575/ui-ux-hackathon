@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 // app/page.tsx
 import Hero from "./components/Hero";
 import BrowseTheRang from "./components/BrowseTheRang";
@@ -8,8 +6,7 @@ import GridGallery from "./components/GridGallery";
 import { getProducts } from "@/sanity/queries/product"; // Ensure this is fetching multiple products
 import ProductListing from "./components/productlisting";
 import { IProduct } from "@/types";
-
-
+import Footer2 from "./components/Footer2";
 
 export default async function Home() {
   // Fetch products from Sanity
@@ -30,26 +27,7 @@ export default async function Home() {
       </section>
       <Rooms />
       <GridGallery />
+      <Footer2 />
     </main>
   );
 }
-=======
-import Hero from "./components/Hero";
-import BrowseTheRang from "./components/BrowseTheRang";
-import Product from "./components/Product";
-
-import Rooms from "./components/Rooms";
-import GridGallery from "./components/GridGallery";
-
-export default function Home() {
-  return (
-    <main>
-      <Hero />
-      <BrowseTheRang />
-      <Product />
-      <Rooms />
-      <GridGallery />
-    </main>
-  );
-}
->>>>>>> 91a95cc9800027ad7578e5d07468c3779b1bd425

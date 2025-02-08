@@ -1,5 +1,4 @@
 
-
 'use client'
 
 import Link from "next/link";
@@ -14,8 +13,8 @@ import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FiHeart } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
-import { ClerkLoaded, SignedIn, SignInButton, UserButton, useUser } from "@clerk/nextjs";
-import { PackageIcon, ShoppingCartIcon } from "lucide-react";
+// import { ClerkLoaded, SignedIn, SignInButton, UserButton, useUser } from "@clerk/nextjs";
+// import { PackageIcon, ShoppingCartIcon } from "lucide-react";
 
 
 export default function Header() {
@@ -34,15 +33,15 @@ export default function Header() {
       setMobileMenuOpen(false);
     }
   };
-  const createClerkPasskey = async () => {
-    try {
-      const response = await user?.createPasskey();
-      console.log(response);
-    } catch (error) {
-      console.error("Error:", JSON.stringify(error, null, 2));
-    }
-  }
-  const { user } = useUser();
+  // const createClerkPasskey = async () => {
+  //   try {
+  //     const response = await user?.createPasskey();
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.error("Error:", JSON.stringify(error, null, 2));
+  //   }
+  // }
+  // const { user } = useUser();
  
   return (
     <header className="shadow-sm w-full mx-auto px-4 sm:px-6 text-xl border-b border-gray-200 bg-white sticky top-0 z-50 md:px-16 lg:px-32">
