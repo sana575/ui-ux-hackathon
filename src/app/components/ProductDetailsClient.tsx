@@ -96,21 +96,6 @@ const ProductDetailsClient = ({ product, params }: { product: IProduct, params: 
               imageUrl: product.imageUrl,
             }}
           />
-
-          <button
-            onClick={() =>
-              toggleWishlist({
-                id: product._id,
-                name: product.title,
-                price: discountedPrice,
-                image: product.imageUrl,
-              })
-            }
-            className="w-full bg-white border border-black text-black py-3 px-6 rounded-md hover:bg-gray-100 transition duration-200 mt-4"
-          >
-            {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
-          </button>
-
           <div className="border-b border-[#9F9F9F] w-full mt-14"></div>
           <div className="mt-8 flex items-center justify-start gap-8">
             <div className="flex flex-col text-[#9F9F9F]">

@@ -16,7 +16,7 @@ const Footer = () => {
           </p>
           <p className="text-gray-600 flex"><IoLocationSharp className="mt-1"/>Sawojajar Malang, Indonesia</p>
           <p className="text-gray-600 flex"><MdOutlineLocalPhone className="mt-1" />+62 89 456 3455</p>
-          <Link href="https://www.funiro.com" className="text-primary hover:underline">
+          <Link href="https://www.furniro.com" className="text-primary hover:underline">
             www.funiro.com
           </Link>
         </div>
@@ -38,7 +38,7 @@ const Footer = () => {
           <h4 className="font-semibold mb-4">Account</h4>
           <ul className="text-gray-600 space-y-2">
             <li><Link href="contact" className="hover:underline">My Account</Link></li>
-            <li><Link href="/ckeckout" className="hover:underline">Checkout</Link></li>
+            <li><Link href="/checkout" className="hover:underline">Checkout</Link></li>
             <li><Link href="/cart" className="hover:underline">My Cart</Link></li>
             <li><Link href="/shop" className="hover:underline">My Catalog</Link></li>
           </ul>
@@ -85,3 +85,11 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
+
+
+
+
+
+

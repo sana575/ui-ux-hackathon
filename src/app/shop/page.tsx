@@ -145,12 +145,14 @@ const ShopPage = () => {
                     }`}
                   />
                 </button>
-                <div className="overflow-hidden rounded-md mb-4 relative">
+                <div className="overflow-hidden rounded-md mb-4 relative h-[200px]">
                   <Image
                     src={product.imageUrl}
                     alt={product.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-                    layout="fill"
+                    fill={true}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    priority={false}
                   />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
