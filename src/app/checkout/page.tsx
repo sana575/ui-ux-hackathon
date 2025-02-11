@@ -1,9 +1,15 @@
 
 "use client";
+
+import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useForm } from "react-hook-form";
+import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { createPaymentIntent } from "../payment/action";
 import BreadCrumb from "../components/BreadCrumb";
-import { useState } from "react";
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
 type FormData = {
   firstName: string;
@@ -17,38 +23,36 @@ type FormData = {
   phone: string;
   email: string;
   additionalInfo?: string;
-  paymentMethod: string;
 };
-  const Checkout = () => {
-    const { cartItems } = useCart(); // Move useCart hook to component level
-    const [selectedPayment, setSelectedPayment] = useState("");
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm<FormData>();
 
-    const onSubmit = (data: FormData) => {
-      if (!selectedPayment) {
-        alert("Please select a payment method");
-        return;
-      }
+export default function CheckoutPage() {
+  const { cartItems } = useCart();
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
-      const orderData = {
-        ...data,
-        paymentMethod: selectedPayment,
-        items: cartItems,
-        total: subtotal,
-      };
-
-      console.log("Order Submitted:", orderData);
-      // clearCart function is not available
-      alert("Order placed successfully!");
-    };
   const subtotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  useEffect(() => {
+    const initializePayment = async () => {
+      const { clientSecret } = await createPaymentIntent();
+      setClientSecret(clientSecret);
+    };
+    initializePayment();
+  }, []);
+
+  const onSubmit = (data: FormData) => {
+    console.log("Billing Details:", data);
+    // Handle form submission along with payment
+  };
+
+  if (!clientSecret) return <div>Loading...</div>;
 
   return (
     <section>
@@ -226,27 +230,20 @@ type FormData = {
               </form>
             </div>
 
-            {/* Order Summary */}
+            {/* Order Summary and Payment */}
             <div className="bg-gray-50 p-6 rounded-lg">
               <h2 className="text-3xl font-bold mb-6">Order Summary</h2>
               <div className="mb-8">
-                <div className="flex justify-between mb-4 font-semibold text-lg">
-                  <span>Product</span>
-                  <span>Subtotal</span>
-                </div>
-
                 {cartItems.map((item) => (
                   <div key={item.id} className="flex justify-between mb-2">
                     <span>{item.name} x {item.quantity}</span>
                     <span>Rs. {(item.price * item.quantity).toLocaleString()}</span>
                   </div>
                 ))}
-
                 <div className="flex justify-between py-4 border-t">
                   <span>Subtotal</span>
                   <span>Rs. {subtotal.toLocaleString()}</span>
                 </div>
-
                 <div className="flex justify-between py-4 border-b font-bold">
                   <span>Total</span>
                   <span className="text-[#B88E2F]">
@@ -255,44 +252,52 @@ type FormData = {
                 </div>
               </div>
 
-              <div className="mb-6">
-                <h3 className="font-semibold mb-4 text-xl">Payment Method</h3>
-                <div className="space-y-4">
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="bank"
-                      onChange={(e) => setSelectedPayment(e.target.value)}
-                      className="mr-2"
-                    />
-                    Direct Bank Transfer
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="cod"
-                      onChange={(e) => setSelectedPayment(e.target.value)}
-                      className="mr-2"
-                    />
-                    Cash on Delivery
-                  </label>
-                </div>
-              </div>
-               {/* Submit Button */}
-               <button
-                  type="submit"
-                  className="w-full bg-[#B88E2F] text-white py-3 rounded-md hover:bg-[#9a7627] transition"
-                >
-                  Place Order
-                </button>
+              <Elements stripe={stripePromise} options={{ clientSecret }}>
+                <PaymentForm />
+              </Elements>
             </div>
           </div>
         </div>
       </div>
     </section>
   );
-};
+}
 
-export default Checkout;
+function PaymentForm() {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+
+    setIsProcessing(true);
+    const { error } = await stripe.confirmPayment({
+      elements,
+      redirect: "if_required",
+    });
+
+    if (error) {
+      setErrorMessage(error.message || "Payment failed");
+    } else {
+      alert("Payment successful!");
+    }
+    setIsProcessing(false);
+  };
+
+  return (
+    <form onSubmit={handlePaymentSubmit} className="space-y-4">
+      <PaymentElement />
+      <button
+        type="submit"
+        disabled={!stripe || isProcessing}
+        className="w-full bg-[#B88E2F] text-white py-3 rounded-md hover:bg-[#9a7627] transition"
+      >
+        {isProcessing ? "Processing..." : "Pay Now"}
+      </button>
+      {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
+    </form>
+  );
+}

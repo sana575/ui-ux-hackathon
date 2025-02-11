@@ -1,3 +1,4 @@
+
 "use client";
 
 import { client } from "@/sanity/lib/client";
@@ -214,10 +215,3 @@ const ShopPage = () => {
 };
 
 export default ShopPage;
-
-
-
-
-
-
-
